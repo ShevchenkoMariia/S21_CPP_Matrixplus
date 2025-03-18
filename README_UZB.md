@@ -137,7 +137,7 @@ Shuningdek, yuqoridagi operatsiyalarga qisman mos keladigan quyidagi operatorlar
 
 ## Part 1. s21_matrix_oop.h kutubxona funksiyasini amalga oshirish
 
-- Dastur C++17standartining C++ tilida gcc kompilyatoridan foydalangan holda ishlab chiqilishi kerak.
+- Dastur C++20 standartining C++ tilida gcc kompilyatoridan foydalangan holda ishlab chiqilishi kerak.
 - Dastur kodi src papkasida joylashgan bo'lishi kerak.
 - Kod yozishda Google Style ga amal qilinishi kerak.
 - Matritsani `S21Matrix` sinfi sifatida amalga oshiring
