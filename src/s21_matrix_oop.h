@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
+#include <stdexcept>
 
 using namespace std;
 
@@ -14,7 +15,7 @@ class S21Matrix {
         // Attributes
         int rows_, cols_;         // Rows and columns
         double **matrix_;         // Pointer to the memory where the matrix is allocated
-    
+
     public:
         S21Matrix(): rows_(0), cols_(0), matrix_(nullptr) {} // Дефолтный конструктор.
         S21Matrix(int rows, int cols); // Параметризированный конструктор (строи и столбцы).
@@ -29,7 +30,7 @@ class S21Matrix {
 	int getCols() const;
 
 	// Mutator
-	void set(int rows, int cols); 
+	void set(int rows, int cols);
 	void setRows(int rows);
 	void setCols(int cols);
 
@@ -58,7 +59,7 @@ class S21Matrix {
         double Determinant(); //Вычисляет и возвращает определитель текущей матрицы.
 
 	/*Вспомагательные функции*/
-	
+
 	S21Matrix minorMatrix(S21Matrix* A, int rowDel, int colDel); // Минор матрицы.
 	void randomFilling(); // рандомное заполнение матрицы числами от 0 до 10;
         void print(); // Вывод матрицы.

@@ -44,7 +44,7 @@ S21Matrix::~S21Matrix() {
 
 
 /*
-         * Реализуй доступ к приватным полям `rows_` и `cols_` через accessor и mutator. 
+         * Реализуй доступ к приватным полям `rows_` и `cols_` через accessor и mutator.
          * При увеличении размера матрица дополняется нулевыми элементами, при уменьшении лишнее просто отбрасывается.
 */
 
@@ -55,7 +55,7 @@ int S21Matrix::getCols() const { return cols_; }
 void S21Matrix::get(int& rows, int& cols) const {
 	rows = getRows();
 	cols = getCols();
-}        
+}
 
 //mutator
 void S21Matrix::setRows(int rows) {
@@ -113,6 +113,9 @@ const S21Matrix& S21Matrix::operator=(const S21Matrix& other) { //провери
 //перегруз оператора +
 S21Matrix S21Matrix::operator+(const S21Matrix& right) const { //проверить const
 	//условие что строки и столбики равны
+	if (rows_ != right.rows_ || cols_ != right.cols_) {
+        throw std::invalid_argument("Error: Matrices must have the same dimensions");
+    }
 	S21Matrix sumMatrix(rows_, cols_);
 	for(int i = 0; i < rows_; i++) {
 		for(int j = 0; j < cols_; j++) {
@@ -125,12 +128,18 @@ S21Matrix S21Matrix::operator+(const S21Matrix& right) const { //провери�
 //перегруз оператора +=
 const S21Matrix& S21Matrix::operator+=(const S21Matrix& right) {
         //условие что строки и столбики равны
+		if (rows_ != right.rows_ || cols_ != right.cols_) {
+			throw std::invalid_argument("Error: Matrices must have the same dimensions");
+		}
 	return *this=*this+right;
 }
 
 //перегруз оператора -
 S21Matrix S21Matrix::operator-(const S21Matrix& right) const { //проверить const
 	//условие что строки и столбики равны
+	if (rows_ != right.rows_ || cols_ != right.cols_) {
+        throw std::invalid_argument("Error: Matrices must have the same dimensions");
+    }
 	S21Matrix subMatrix(rows_, cols_);
 	for(int i = 0; i < rows_; i++) {
 		for(int j = 0; j < cols_; j++) {
@@ -141,8 +150,11 @@ S21Matrix S21Matrix::operator-(const S21Matrix& right) const { //провери�
 }
 
 //перегруз оператора -=
-const S21Matrix& S21Matrix::operator-=(const S21Matrix& right) { 
+const S21Matrix& S21Matrix::operator-=(const S21Matrix& right) {
         //условие что строки и столбики равны
+		if (rows_ != right.rows_ || cols_ != right.cols_) {
+			throw std::invalid_argument("Error: Matrices must have the same dimensions");
+		}
 	return *this=*this-right;
 }
 
@@ -165,6 +177,9 @@ const S21Matrix& S21Matrix::operator*=(const double num){
 //перегруз оператора * матриц
 S21Matrix S21Matrix::operator*(const S21Matrix& right) const {
 	//Число столбцов первой матрицы не равно числу строк второй матрицы
+	if (cols_ != right.rows_) {
+        throw std::invalid_argument("Error: the number of columns in the first matrix is not equal to the number of rows in the second matrix");
+	}
 	S21Matrix multMatrix(cols_, right.rows_);
 	for (int i = 0; i < multMatrix.rows_; i++) {
 		for (int j = 0; j < multMatrix.cols_; j++) {
@@ -177,11 +192,15 @@ S21Matrix S21Matrix::operator*(const S21Matrix& right) const {
 }
 
 //перегруз оператора *= матрицы
-const S21Matrix& S21Matrix::operator*=(const S21Matrix& right) { 
+const S21Matrix& S21Matrix::operator*=(const S21Matrix& right) {
 	//Число столбцов первой матрицы не равно числу строк второй матрицы
+	if (cols_ != right.rows_) {
+        throw std::invalid_argument("Error: the number of columns in the first matrix is not equal to the number of rows in the second matrix");
+	}
 	return *this=*this*right;
 }
 
+//Проверка на равенство матриц
 bool S21Matrix::operator==(const S21Matrix& right) const {
 	//Число столбцов и строк равны
 	bool result = 1;
@@ -196,13 +215,21 @@ bool S21Matrix::operator==(const S21Matrix& right) const {
 	return result;
 }
 
+// перегруз оператора (), используется для доступа к элементам без изменения их значений
 double S21Matrix::operator() (int i, int j) const {
 	//выход за границы массива
+	if (i < 0 || i >= rows_ || j < 0 || j >= cols_) {
+		throw std::out_of_range("Error: index outside the matrix");
+	}
 	return matrix_[i][j];
 }
 
+// перегруз оператора (), может использоваться для изменения значения
 double& S21Matrix::operator() (int i, int j) {
 	//выход за границы массива
+	if (i < 0 || i >= rows_ || j < 0 || j >= cols_) {
+		throw std::out_of_range("Error: index outside the matrix");
+	}
 	return this->matrix_[i][j];
 }
 
@@ -229,17 +256,26 @@ void S21Matrix::randomFilling() {
 
 //Прибавляет вторую матрицу к текущей | различная размерность матриц.
 void S21Matrix::SumMatrix(const S21Matrix& other){
-	*this+=other;
+	if (rows_ != other.rows_ || cols_ != other.cols_) {
+        throw std::invalid_argument("Error: Matrices must have the same dimensions");
+    }
+	*this = *this + other;
 }
 
 //Вычитает из текущей матрицы другую | различная размерность матриц.
 void S21Matrix::SubMatrix(const S21Matrix& other){
-	*this-=other;
+	if (rows_ != other.rows_ || cols_ != other.cols_) {
+        throw std::invalid_argument("Error: Matrices must have the same dimensions");
+    }
+	*this= *this - other;
 }
 
-//Умножает текущую матрицу на вторую. | число столбцов первой матрицы не равно числу строк второй матрицы. 
+//Умножает текущую матрицу на вторую. | число столбцов первой матрицы не равно числу строк второй матрицы.
 void S21Matrix::MulMatrix(const S21Matrix& other){
-	*this*=other;
+	if (cols_ != other.rows_) {
+        throw std::invalid_argument("Error: the number of columns in the first matrix is not equal to the number of rows in the second matrix");
+	}
+	*this = *this * other;
 }
 
 //Проверяет матрицы на равенство между собой
@@ -249,15 +285,15 @@ bool S21Matrix::EqMatrix(const S21Matrix& other){
 
 //Умножает текущую матрицу на число.
 void S21Matrix::MulNumber(const double num){
-	*this*=num;
+	*this= *this * num;
 }
 
-//Создает новую транспонированную матрицу из текущей и возвращает ее. 
+//Создает новую транспонированную матрицу из текущей и возвращает ее.
 S21Matrix S21Matrix::Transpose(){
 	S21Matrix trMatrix(cols_, rows_);
 	for(int i = 0; i < trMatrix.rows_; i++) {
 		for(int j = 0; j < trMatrix.cols_; j++) {
-			trMatrix.matrix_[i][j] = matrix_[j][i]; 
+			trMatrix.matrix_[i][j] = matrix_[j][i];
 		}
 	}
 	return trMatrix;
@@ -265,7 +301,9 @@ S21Matrix S21Matrix::Transpose(){
 
 //Вычисляет матрицу алгебраических дополнений текущей матрицы и возвращает ее. | Матрица не является квадратной.
 S21Matrix S21Matrix::CalcComplements(){
-	//Матрица не является квадратной.
+	if (rows_ != cols_) {
+        throw std::invalid_argument("Error: matrix is not square");
+    }
 	S21Matrix res(rows_, cols_);
 	for (int i = 0; i < res.rows_; i++) {
         	for (int j = 0; j < res.cols_; j++) {
@@ -280,7 +318,9 @@ S21Matrix S21Matrix::CalcComplements(){
 
 //Вычисляет и возвращает определитель текущей матрицы. | Матрица не является квадратной.
 double S21Matrix::Determinant(){
-	//матрица не является квадратной
+	if (rows_ != cols_) {
+        throw std::invalid_argument("Error: matrix is not square");
+    }
 	double det = 0.0;
 	if(rows_ == 1) {
 		det = matrix_[0][0];
@@ -316,11 +356,11 @@ S21Matrix S21Matrix::minorMatrix(S21Matrix* A, int rowDel, int colDel) {
 
 //Вычисляет и возвращает обратную матрицу. | Определитель матрицы равен 0.
 S21Matrix S21Matrix::InverseMatrix() {
-	//определитель матрицы равен 0 ->  
-	S21Matrix res;
 	double determinant = this->Determinant();
-	if (determinant == 0) 
-		throw "Error, determinant == 0"
+	if (determinant == 0)
+		throw std::runtime_error("Error: Determinant is equal to 0");
+
+	S21Matrix res;
 	if (rows_ == 1) {
 		S21Matrix res1(rows_, cols_);
 	        res.matrix_[0][0] = 1 / matrix_[0][0];
@@ -333,13 +373,3 @@ S21Matrix S21Matrix::InverseMatrix() {
 	}
 	return res;
 }
-
-
-
-
-
-
-
-
-
-
