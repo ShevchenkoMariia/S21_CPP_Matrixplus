@@ -2,9 +2,6 @@
 
 Implementation of the s21_matrix_oop.h library.
 
-The russian version of the task can be found in the repository.
-
-
 💡 [Tap here](https://new.oprosso.net/p/4cb31ec3f47a4596bc758ea1861fb624) **to leave your feedback on the project**. It's anonymous and will help our team make your educational experience better. We recommend completing the survey immediately after the project.
 
 ## Contents
@@ -147,7 +144,7 @@ And you also need to overload the following operators, partly corresponding to t
 
 ## Part 1. Implementation of the s21_matrix_oop.h library functions
 
-- The program must be developed in C++ language of C++17 standard using gcc compiler;
+- The program must be developed in C++ language of C++20 standard using gcc compiler;
 - The program code must be located in the src folder;
 - When writing code it is necessary to follow the Google style;
 - Implement the matrix as an `S21Matrix` class;
@@ -158,4 +155,3 @@ And you also need to overload the following operators, partly corresponding to t
 - Overload the operators according to the table in the chapter [above](#matrix-operations);
 - Prepare full coverage of library functions code with unit-tests using the GTest library;
 - Provide a Makefile for building the library and tests (with targets all, clean, test, s21_matrix_oop.a).
-
