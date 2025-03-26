@@ -2,53 +2,20 @@
 
 Implementation of the s21_matrix_oop.h library.
 
-The russian version of the task can be found in the repository.
-
-
-💡 [Tap here](https://new.oprosso.net/p/4cb31ec3f47a4596bc758ea1861fb624) **to leave your feedback on the project**. It's anonymous and will help our team make your educational experience better. We recommend completing the survey immediately after the project.
-
 ## Contents
 
-1. [Chapter I](#chapter-i) \
-    1.1. [Introduction](#introduction)
-2. [Chapter II](#chapter-ii) \
-    2.1. [Information](#information)
-3. [Chapter III](#chapter-iii) \
-    3.1. [Part 1](#part-1-implementation-of-the-s21_matrix_ooph-library-functions)
-
+1. [Chapter I](#chapter-i)   
+   1.1. [Introduction](#introduction)
+2. [Chapter II](#chapter-ii)   
+   2.1. [Information](#information)
+3. [Chapter III](#chapter-iii)   
+   3.1. [Part 1](#part-1-implementation-of-the-s21_matrix_ooph-library-functions)
 
 ## Chapter I
 
-![s21_matrix](misc/images/s21_matrix.png)
-
-Planet Earth, 20 September 2000.
-
-*"Our CEO has such a wonderful country house! It has everything to make ideas come true. A veranda overlooking a huge swimming pool on the lawn completes the picture of a passionate and intelligent person."*
-
-*"Yes, I agree! I'm so glad we were invited here. To tell you the truth, I feel a bit déjà vu, like I've seen this place before."*
-
-*"Oh, that's weird. Believe me, you won't find a house like this anywhere else in the country!* \
-*So, what were we talking about? Oh, right! For several days now, in this vibrant place, id Software's main technical team has been discussing a new technology we want to introduce in our upcoming game Doom 3. And what creates the most sense of reality in an image? The play of light and shadow, of course, which currently takes too long to compute and puts a strain on the CPU.
-John is known for his technological and algorithmic ideas and tricks that have led to crazy breakthroughs in speed and code optimisation."*
-
-*"Yeah, feels like I've heard that one before."*
-
-*"Really? I guess Catharina got to you first.* \
-*Anyway, on to the interesting part. John Carmack, our Chief Technology Officer and the founder of the company, presented a theoretical development that would allow shadows to be cast on a scene after it has gone through the entire graphics pipeline, using a depth buffer and a stencil buffer."*
-
-*"Oh, that's really... fascinating."*
-
-*"We invited you to this party for a reason. The whole team is working on a new way of creating shadows in a scene, and your department in particular has been asked by John to implement a very fast and optimised library of all sorts of matrix transformations on which the entire mathematical logic of the algorithm will be based. Vectors and matrices, transpose and SRT conversions, and many other mathematical objects and operations used in computer graphics.*
-*For a correct and considered transition to the new method, we need a significant and impressive performance change, and you will be responsible for it! Please remember that all the work must be done in a modern OOP style to achieve maximum code quality!"*
-
-*"Well, I would be… um… happy to help you."*
-
-*"Perfect! Who knows, maybe..."*
-
 ## Introduction
 
-In this project, you will implement the matrix library that you already know from the **s21_matrix** project, but this time you will be using the object-oriented approach (see materials). The object-oriented approach allows to implement a library for matrices as a separate class whose objects have defined operations, that can be represented both as methods and as standard operators +, -, *, etc.
-
+In this project, you will implement the matrix library that you already know from the __s21_matrix__ project, but this time you will be using the object-oriented approach (see materials). The object-oriented approach allows to implement a library for matrices as a separate class whose objects have defined operations, that can be represented both as methods and as standard operators +, -, *, etc.
 
 ## Chapter II
 
@@ -60,6 +27,7 @@ C++ is a programming language based on the C language for implementing programs 
 For the most part, C++ only adds or modifies capabilities for the programmer, rather than taking away anything, so it's easier to talk about the differences (see Resources) than the similarities when it comes to C++.
 
 ### An example of a matrix class in C++
+
 ```cpp
 class S21Matrix {
     private:
@@ -71,7 +39,7 @@ class S21Matrix {
         S21Matrix();              // Default constructor
         ~S21Matrix();             // Destructor
 
-        void SumMatrix(const S21Matrix& other); 
+        void SumMatrix(const S21Matrix& other);
         // Other methods..
 }
 ```
@@ -80,13 +48,13 @@ class S21Matrix {
 
 Matrix is a rectangular table of numbers arranged in m rows and n columns:
 
-```
+```sh
     1 2 3
 A = 4 5 6
     7 8 9
 ```
 
-```
+```sh
      1  2  3  4
 В =  5  6  7  8
      9 10 11 12
@@ -94,10 +62,10 @@ A = 4 5 6
 
 You can get the desired element using indices as follows A[1,1] = 1, where the first index is the row number, the second is the column number.
 
-The order of a matrix is the number of its rows or columns. \
+The order of a matrix is the number of its rows or columns.   
 The main diagonal of a square matrix is the diagonal from the upper left to the lower right corner. \
 
-A rectangular matrix (B) is a matrix with the number of rows not equal to the number of columns. \
+A rectangular matrix (B) is a matrix with the number of rows not equal to the number of columns.   
 A square matrix (A) is a matrix with the number of rows equal to the number of columns.
 
 ## Matrix operations
@@ -141,7 +109,6 @@ And you also need to overload the following operators, partly corresponding to t
 | `-=`  | Difference assignment (`SubMatrix`) | different matrix dimensions. |
 | `*=`  | Multiplication assignment (`MulMatrix`/`MulNumber`). | The number of columns of the first matrix does not equal the number of rows of the second matrix. |
 | `(int i, int j)`  | Indexation by matrix elements (row, column). | Index is outside the matrix. |
-
 
 ## Chapter III
 
