@@ -2,13 +2,22 @@
 
 Implementation of the s21_matrix_oop.h library.
 
+The experience gained as a result of the project:
+- creation of a static library for working with matrices in C++;
+- development and optimization of algorithms for performing operations on matrices (addition, multiplication, transposition, etc.);
+- application of OOP principles, such as encapsulation and operator overloading, to implement the functionality of working with matrices;
+- preparation and writing of unit tests using the GTest library;
+- design the project as a static library with the appropriate header file and Makefile settings for the build;
+- compliance with Google Style coding style for better readability and ease of code support;
+- using Git.
+
 ## Contents
 
-1. [Chapter I](#chapter-i)   
+1. [Chapter I](#chapter-i)  
    1.1. [Introduction](#introduction)
-2. [Chapter II](#chapter-ii)   
+2. [Chapter II](#chapter-ii)  
    2.1. [Information](#information)
-3. [Chapter III](#chapter-iii)   
+3. [Chapter III](#chapter-iii)  
    3.1. [Part 1](#part-1-implementation-of-the-s21_matrix_ooph-library-functions)
 
 ## Chapter I
@@ -62,10 +71,10 @@ A = 4 5 6
 
 You can get the desired element using indices as follows A[1,1] = 1, where the first index is the row number, the second is the column number.
 
-The order of a matrix is the number of its rows or columns.   
+The order of a matrix is the number of its rows or columns.  
 The main diagonal of a square matrix is the diagonal from the upper left to the lower right corner. \
 
-A rectangular matrix (B) is a matrix with the number of rows not equal to the number of columns.   
+A rectangular matrix (B) is a matrix with the number of rows not equal to the number of columns.  
 A square matrix (A) is a matrix with the number of rows equal to the number of columns.
 
 ## Matrix operations
